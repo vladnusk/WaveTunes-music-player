@@ -1,5 +1,3 @@
-import {useEffect} from "react";
-
 import LibrarySong from "./LibrarySong";
 
 const Library = ({
@@ -9,19 +7,7 @@ const Library = ({
   isPlaying,
   setSongs,
   libraryStatus,
-  defaultMusic,
 }) => {
-
-  // useEffect(()=>{
-    
-     
-  //       const localData = JSON.parse(localStorage.getItem("songs")) || [];
-  //       setSongs(defaultMusic().concat(localData))
-  //       console.log(localData)
-     
-  // }, [songs])
- 
-
   return (
     <div className={`library ${libraryStatus ? "active-library" : " "}`}>
       <h2>Library</h2>
@@ -40,7 +26,6 @@ const Library = ({
             isPlaying={isPlaying}
             setSongs={setSongs}
             defaultSong={song.default}
-            
           />
         ))}
       </div>

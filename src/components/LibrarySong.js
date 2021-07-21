@@ -14,10 +14,7 @@ const LibrarySong = ({
   setSongs,
   active,
   defaultSong,
- 
 }) => {
-  
-
   const songSelectHandler = () => {
     const selectedSong = songs.filter((state) => state.id === id);
     setCurrentSong({ ...selectedSong[0] });
@@ -41,16 +38,22 @@ const LibrarySong = ({
     playAudio(isPlaying, audioRef);
   };
 
-const deleteSong = () => {
-  const selectedSong = songs.filter((state) => state.id === id);
-  const localData = JSON.parse(localStorage.getItem("songs")) || [];
-  const indexToDelete = localData.map((item)=> { return item.id; }).indexOf(selectedSong[0].id);
-   localData.splice(indexToDelete, 1)
-   localStorage.setItem("songs", JSON.stringify(localData));
- 
-   setSongs(defaultMusic().concat(localData))
-console.log(defaultMusic().concat(localData))
-}
+  const deleteSong = (e) => {
+    e.stopPropagation();
+    const selectedSong = songs.filter((state) => state.id === id);
+    const localData = JSON.parse(localStorage.getItem("songs")) || [];
+    const indexToDelete = localData
+      .map((item) => {
+        return item.id;
+      })
+      .indexOf(selectedSong[0].id);
+    localData.splice(indexToDelete, 1);
+    localStorage.setItem("songs", JSON.stringify(localData));
+
+    const updatedSongs = defaultMusic().concat(localData);
+
+    setSongs(updatedSongs);
+  };
 
   return (
     <div
@@ -62,9 +65,14 @@ console.log(defaultMusic().concat(localData))
         <h3>{name}</h3>
         <h4>{artist}</h4>
       </div>
-      
-      <div className={`delete-song ${defaultSong ? 'hidden' : ''}`}>
-<IconButton onClick={deleteSong} icon={TrashIcon} intent="danger" size="small" />
+
+      <div className={`delete-song ${defaultSong ? "hidden" : ""}`}>
+        <IconButton
+          onClick={deleteSong}
+          icon={TrashIcon}
+          intent="danger"
+          size="small"
+        />
       </div>
     </div>
   );
