@@ -1,9 +1,16 @@
 import { Autocomplete, SearchInput, IconButton, PlusIcon } from "evergreen-ui";
 import { v4 as uuid } from "uuid";
 import { useEffect, useState } from "react";
-
-
-const SongSearch = ({ setCurrentSong, currentSong, setSongs, defaultMusic }) => {
+import { playAudio } from "../util";
+const SongSearch = ({
+  setCurrentSong,
+  currentSong,
+  setSongs,
+  defaultMusic,
+  songs,
+  audioRef,
+  isPlaying,
+}) => {
   const [songsOutput, setSongsOutput] = useState([]);
   const [songTitle, setSongTitle] = useState("");
 
@@ -43,11 +50,10 @@ const SongSearch = ({ setCurrentSong, currentSong, setSongs, defaultMusic }) => 
             songArr.forEach((song) => {
               if (
                 !(duplicateCatcher[song.artist] && duplicateCatcher[song.name])
-                
               ) {
                 uniqueSongs.push(song);
-                duplicateCatcher[song.artist]  = "ok";
-                duplicateCatcher[song.name] = 'ok'
+                duplicateCatcher[song.artist] = "ok";
+                duplicateCatcher[song.name] = "ok";
               }
             });
 
@@ -60,39 +66,34 @@ const SongSearch = ({ setCurrentSong, currentSong, setSongs, defaultMusic }) => 
         });
     };
     fetchSongs();
-   
   }, [songTitle]);
-
-
-  
-
 
   const changeSongHandler = (changedSong) => {
     const selectedSong = songsOutput.find(
       (song) => `${song.artist} - ${song.name}` === changedSong
     );
     setCurrentSong(selectedSong);
+    playAudio(isPlaying, audioRef);
   };
 
   const addToLibrary = () => {
     const localData = JSON.parse(localStorage.getItem("songs")) || [];
-    let obj = localData.find((song) => song.id === currentSong.id);
+    let obj = songs.find((song) => song.id === currentSong.id);
 
     obj ? console.log("song already added!") : localData.push(currentSong);
 
     localStorage.setItem("songs", JSON.stringify(localData));
 
-    setSongs(defaultMusic().concat(localData))
+    setSongs(defaultMusic().concat(localData));
   };
 
   return (
     <div className="song-search">
-    
       <Autocomplete
         title="Search results:"
         items={songsOutput.map((song) => `${song.artist} - ${song.name}`)}
         onChange={changeSongHandler}
-       >
+      >
         {(props) => {
           const { getInputProps, getRef, inputValue } = props;
           return (
@@ -103,13 +104,12 @@ const SongSearch = ({ setCurrentSong, currentSong, setSongs, defaultMusic }) => 
               placeholder="enter song or artist name"
               value={inputValue}
               ref={getRef}
-              
               {...getInputProps()}
             />
           );
         }}
       </Autocomplete>
-         
+
       <IconButton icon={PlusIcon} onClick={addToLibrary} />
     </div>
   );

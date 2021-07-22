@@ -41,12 +41,12 @@
   }
 }
 
-.delete-song{
-  display:block;
+.delete-song {
+  display: block;
   position: absolute;
   right: 1rem;
 }
-.hidden{
+.hidden {
   display: none;
 }
 /* The emerging W3C standard
@@ -80,5 +80,8 @@
 @media screen and (max-width: 768px) {
   .library {
     width: 100%;
+  }
+  .delete-song {
+    margin-right: 1.5rem;
   }
 }

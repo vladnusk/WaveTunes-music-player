@@ -20,12 +20,30 @@ nav {
     background: rgb(65, 65, 65);
     color: white;
   }
+  h1 {
+    user-select: none;
+  }
 }
 
 @media screen and (max-width: 768px) {
   nav {
+    display: flex;
+    flex-direction: column;
     button {
       z-index: 10;
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: 1px solid rgb(65, 65, 65);
+    }
+    .song-search {
+      margin-top: 1.3rem;
+      z-index: 0;
+    }
+    h1 {
+      position: absolute;
+      left: 0.8rem;
+      top: 0.8rem;
     }
   }
 }

@@ -9,6 +9,9 @@ const Nav = ({
   defaultMusic,
   currentSong,
   setSongs,
+  songs,
+  audioRef,
+  isPlaying,
 }) => {
   const openLibraryHandler = () => {
     setLibraryStatus(!libraryStatus);
@@ -17,12 +20,17 @@ const Nav = ({
   return (
     <nav>
       <h1>WaveTunes</h1>
-      <SongSearch
-        setCurrentSong={setCurrentSong}
-        defaultMusic={defaultMusic}
-        currentSong={currentSong}
-        setSongs={setSongs}
-      />
+      <div className="song-search">
+        <SongSearch
+          setCurrentSong={setCurrentSong}
+          defaultMusic={defaultMusic}
+          currentSong={currentSong}
+          setSongs={setSongs}
+          songs={songs}
+          isPlaying={isPlaying}
+          audioRef={audioRef}
+        />
+      </div>
       <button
         className={libraryStatus ? "library-active" : ""}
         onClick={openLibraryHandler}
