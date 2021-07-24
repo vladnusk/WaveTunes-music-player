@@ -1,5 +1,4 @@
-import { Autocomplete, SearchInput, IconButton, PlusIcon } from "evergreen-ui";
-import { v4 as uuid } from "uuid";
+import { Autocomplete, SearchInput, Button } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import { playAudio } from "../util";
 const SongSearch = ({
@@ -39,7 +38,7 @@ const SongSearch = ({
                 id: song.id,
                 cover: song.album.cover_big,
                 audio: song.preview,
-                key: uuid(),
+                key: song.id,
                 color: ["#5C84C9", "#20364B"],
                 active: false,
               };
@@ -110,7 +109,7 @@ const SongSearch = ({
         }}
       </Autocomplete>
 
-      <IconButton icon={PlusIcon} onClick={addToLibrary} />
+      <Button onClick={addToLibrary}>add song</Button>
     </div>
   );
 };

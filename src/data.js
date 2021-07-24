@@ -1,7 +1,4 @@
-import { v4 as uuid } from "uuid";
-
 const defaultMusic = () => {
-  
   return [
     {
       name: "Mask",
@@ -12,7 +9,7 @@ const defaultMusic = () => {
         "https://cdns-preview-c.dzcdn.net/stream/c-cb7d18a73ddbbcb5252280bfc9fa7095-2.mp3 ",
 
       color: ["#5C84C9", "#20364B"],
-      id: uuid(),
+      id: 815834812,
       active: true,
       default: true,
     },
@@ -25,7 +22,7 @@ const defaultMusic = () => {
         "https://cdns-preview-a.dzcdn.net/stream/c-af83086f6721ec79919bd5f138bbdd2c-4.mp3 ",
 
       color: ["#FCEEDC", "#2B242E"],
-      id: uuid(),
+      id: 455800582,
       active: false,
       default: true,
     },
@@ -38,11 +35,11 @@ const defaultMusic = () => {
         "https://cdns-preview-9.dzcdn.net/stream/c-9588863bcfa5358d714c87f5f246bd97-6.mp3",
 
       color: ["#FF7100", "#4ADDFF"],
-      id: uuid(),
+      id: 136149210,
       active: false,
       default: true,
     },
-  ]
+  ];
 };
 
 export default defaultMusic;

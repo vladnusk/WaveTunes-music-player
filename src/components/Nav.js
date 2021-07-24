@@ -32,7 +32,7 @@ const Nav = ({
         />
       </div>
       <button
-        className={libraryStatus ? "library-active" : ""}
+        className={libraryStatus ? "lib-btn library-active" : "lib-btn"}
         onClick={openLibraryHandler}
       >
         Library
